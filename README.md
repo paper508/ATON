@@ -43,6 +43,7 @@ torch==1.3.0
 numpy==1.15.0
 pandas==0.25.2
 scikit-learn==0.23.1
+pyod==0.8.2
 tqdm==4.48.2
 prettytable==0.7.2
 shap==0.35.0
