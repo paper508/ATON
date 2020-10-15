@@ -10,7 +10,7 @@ This is the source code of submission 508.
 `config.py`: configuration and default hyper-parameters  
 `main.py` main script to run the experiments
 
-### how to use?
+### How to use?
 ##### 1. For ATON, COIN, SHAP, and LIME
 1. modify variant `algorithm_name` in `main.py` (support algorithm: `aton`, `coin`, `shap`, `lime`  in lowercase)
 2. use `python main.py --path data/ --runs 10 `
@@ -25,7 +25,7 @@ please run `main_sinne.py`
 
 
 
-### requierments
+### Requierments
 main packages of this project  
 ```
 torch==1.3.0
