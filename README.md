@@ -1,6 +1,10 @@
 # ATON
 
-This is the source code of submission 508.  
+This is the source code of a submission of WWW'21 (Submission Id: 508)  
+The source code of the proposed method ATON in included in folder `model_aton`.  
+Please also find the Ground-truth outlier interpretation annotations in folder `data_od_evaluation`.   
+*We expect these annotations can foster further possible reasearch for this new practical probelm.*
+
 
 
 ### Structure
