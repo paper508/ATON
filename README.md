@@ -11,16 +11,16 @@ This is the source code of submission 508.
 `main.py` main script to run the experiments
 
 ### how to use?
-#####1. For ATON, COIN, SHAP, and LIME
+##### 1. For ATON, COIN, SHAP, and LIME
 1. modify variant `algorithm_name` in `main.py` (support algorithm: `aton`, `coin`, `shap`, `lime`  in lowercase)
 2. use `python main.py --path data/ --runs 10 `
 3. the results can be found in `record/[algorithm_name]/` folder  
 
-#####2. For ATON+, COIN+  
+##### 2. For ATON+, COIN+  
 use `--w2s_ratio auto` to run ATON+  
 use `--w2s_ratio pn` to run COIN+
 
-#####3. For competitor SiNNE
+##### 3. For competitor SiNNE
 please run `main_sinne.py` 
 
 
