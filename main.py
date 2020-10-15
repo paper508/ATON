@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 
 # ------------------- parser ----------------- #
 # this script can perform outlier interpretation method ATON, COIN, SHAP, and LIME
-algorithm_name = "coin"
+algorithm_name = "aton"
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=ast.literal_eval, default=True)
 parser.add_argument('--eval', type=ast.literal_eval, default=True)
