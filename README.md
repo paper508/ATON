@@ -24,6 +24,12 @@ This is the source code of submission 508.
 ##### 3. For competitor SiNNE
 please run `main_sinne.py` 
 
+### args of main.py
+- `--path [str]`        - the path of data folder or an individual data file (in csv format)  
+- `--gpu  [True/False]` - use GPU or not
+- `--runs [int]`         - how many times to run a method on each dataset (we run 10 times and report average performance in our submission)
+- `--w2s_ratio [auto/real_len/pn]`  - how to transfer feature weight to feature subspace
+- `--eval [True/False]` - evaluate or not, use False for scalability test
 
 
 ### Requierments
