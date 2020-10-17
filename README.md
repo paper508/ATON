@@ -1,9 +1,6 @@
 # ATON
 
 This is the source code of a submission of WWW'21 (Submission Id: 508)  
-The source code of the proposed method ATON in included in folder `model_aton`.  
-Please also find the Ground-truth outlier interpretation annotations in folder `data_od_evaluation`.   
-*We expect these annotations can foster further possible reasearch for this new practical probelm.*
 
 
 
@@ -20,7 +17,7 @@ Please also find the Ground-truth outlier interpretation annotations in folder `
 2. use `python main.py --path data/ --runs 10 `
 3. the results can be found in `record/[algorithm_name]/` folder  
 
-##### 2. For ATON+ and competitor COIN+ 
+##### 2. For ATON' and competitor COIN' 
 1. modify variant `algorithm_name` in `main.py` to `aton` or `coin`  
 2. use `python main.py --path data/ --w2s_ratio auto --runs 10` to run ATON+  
    use `python main.py --path data/ --w2s_ratio pn --runs 10` to run COIN+  
@@ -33,8 +30,8 @@ please run `main_sinne.py`
 - `--gpu  [True/False]` - use GPU or not
 - `--runs [int]`         - how many times to run a method on each dataset (we run 10 times and report average performance in our submission)
 - `--w2s_ratio [auto/real_len/pn]`  - how to transfer feature weight to feature subspace
-- `--eval [True/False]` - evaluate or not, use False for scalability test
-
+- `--eval [True/False]` - evaluate or not, use False for scalability test  
+... (other hypter-parameters of different methods. You may want to use -h to check the corresponding hypter-parameters after modifing the `algorithm_name`)  
 
 ### Requierments
 main packages of this project  
@@ -49,6 +46,17 @@ prettytable==0.7.2
 shap==0.35.0
 lime==0.2.0.1
 ```
+
+
+### Ground-truth annotations
+Please also find the Ground-truth outlier interpretation annotations in folder `data_od_evaluation`.   
+*We expect these annotations can foster further possible reasearchs on this new practical probelm.*  
+  
+You may find that each dataset has three annotation files, please refer to the detailed annotation generation process in our submission. We detailedly introduced it in Section 5.1.4:  
+
+**How to generate the ground-truth annotations:**
+>  We employ three different kinds of representative outlier detection methods (i.e., ensemble-based method iForest, probability-based method COPOD, and distance-based method HBOS) to evaluate outlying degree of real outliers given every possible subspace. A good explanation for an outlier should be a high-contrast subspace that the outlier explicitly demonstrates its outlierness, and outlier detectors can easily and certainly predict it as an outlier in this subspace. Therefore, the ground-truth interpretation for each outlier is defined as the subspace that the outlier obtains the highest outlier score among all the possible subspaces.
+
 
 
 ### References
