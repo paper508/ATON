@@ -6,18 +6,18 @@ from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import RBF
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier, BaggingClassifier
-from sklearn.naive_bayes import GaussianNB  # 高斯朴素贝叶斯
+from sklearn.naive_bayes import GaussianNB
 import pandas as pd
 import numpy as np
 
 classifiers = {
-    'knn': KNeighborsClassifier(),                # K最近邻
-    'rbf_svm': SVC(probability=True),                  # 径向基函数的支持向量机
-    'adaBoost': AdaBoostClassifier(),                                                       # 通过迭代弱分类器而产生最终的强分类器的算法
-    'gradient_boosting': GradientBoostingClassifier(),  # 梯度提升树
+    'knn': KNeighborsClassifier(),
+    'rbf_svm': SVC(probability=True),
+    'adaBoost': AdaBoostClassifier(),
+    'gradient_boosting': GradientBoostingClassifier(),
     'bagging': BaggingClassifier(),
-    'naive_bayes': GaussianNB(),                       # 朴素贝叶斯
-    'mlp': MLPClassifier()                      # 多层感知机
+    'naive_bayes': GaussianNB(),
+    'mlp': MLPClassifier()
 }
 
 
