@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 import random, string
+import os
 mask = ''.join(random.sample(string.ascii_letters, 8))
 
 
@@ -43,6 +44,8 @@ class EarlyStopping:
         self.delta = delta
         self.path = path
         self.trace_func = trace_func
+        if os.path.exists(self.path):
+            os.mkdir(self.path)
 
     def __call__(self, val_loss, model):
         score = -val_loss

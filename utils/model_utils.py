@@ -6,7 +6,6 @@ def weight2subspace(weight, ratio=0.7, num=-1):
     """
     this function is to transfer feature weight list to a feature subspace with higher weight
     given different ratio (ratio of weight summation of subspace to the full space) of subspace length
-    :param self:
     :param weight:
     :param ratio:
     :param num:

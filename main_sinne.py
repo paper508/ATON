@@ -6,20 +6,18 @@ import pandas as pd
 import numpy as np
 from prettytable import PrettyTable
 from model_sinne.SiNNE import SiNNE
+from model_iml.Anchor import Anchor
 from config import root
 from eval.evaluation_od import evaluation_od
 from utils.eval_print_utils import print_eval_runs2
 
 
 # ------------------- parameters ----------------- #
-input_root_list = [root + "data/"]
-algorithm_name = "sinne"
-od_eval_model = ["iforest", "copod", "hbos"]
-runs = 1
-record_name = ""
-
+algorithm_name = "anchor"
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--path', type=str, default="data/")
+parser.add_argument('--runs', type=int, default=1)
 parser.add_argument('--eval', type=ast.literal_eval, default=True, help='')
 if algorithm_name == "sinne":
     parser.add_argument('--max_level', default='full', help='')
@@ -28,9 +26,16 @@ if algorithm_name == "sinne":
     parser.add_argument("--sample_num", type=int, default=8, help='')
     parser.add_argument("--pretrain", type=bool, default=False, help='')
     parser.add_argument("--verbose", type=bool, default=False, help='')
+elif algorithm_name == 'anchor':
+    parser.add_argument('--kernel', default='rbf', help='')
 else:
     raise NotImplementedError("not supported algorithm")
 args = parser.parse_args()
+
+input_root_list = [root + args.path]
+od_eval_model = ["iforest", "copod", "hbos"]
+runs = args.runs
+record_name = ""
 
 # ------------------- record ----------------- #
 if not os.path.exists("record/" + algorithm_name):
@@ -72,6 +77,9 @@ def main(path, run_times):
         if algorithm_name == "sinne":
             model = SiNNE(max_level=args.max_level, width=args.width, ensemble_num=args.ensemble_num,
                           sample_num=args.sample_num, pretrain=args.pretrain)
+            exp_subspace_list = model.fit(X, y)
+        elif algorithm_name == 'anchor':
+            model = Anchor()
             exp_subspace_list = model.fit(X, y)
         else:
             raise NotImplementedError("not implemented the algorithm")

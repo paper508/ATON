@@ -11,9 +11,10 @@ from model_aton.ATON import ATON
 from model_aton.ATON_ablation import ATONabla
 from model_aton.ATON_ablation2 import ATONabla2
 from model_aton.ATON_ablation3 import ATONabla3
-from model_mle.SHAP import SHAP
-from model_mle.LIME import LIME
+from model_iml.SHAP import SHAP
+from model_iml.LIME import LIME
 from model_coin.COIN import COIN
+from model_iml.IntGrad import IntGrad
 
 from utils import model_utils
 from utils.eval_print_utils import print_eval_runs
@@ -24,8 +25,8 @@ warnings.filterwarnings("ignore")
 
 
 # ------------------- parser ----------------- #
-# this script can perform outlier interpretation method ATON, COIN, SHAP, and LIME
-algorithm_name = "aton"
+# this script can perform outlier interpretation method ATON, COIN, SHAP, and LIME, IntGrad
+algorithm_name = "intgrad"
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=ast.literal_eval, default=True)
 parser.add_argument('--eval', type=ast.literal_eval, default=True)
@@ -146,7 +147,7 @@ def main(path, run_times):
 
 def run_model(algorithm, X, y):
     if algorithm == "aton":
-        model = ATON(verbose=False, gpu=False,
+        model = ATON(verbose=False, gpu=args.gpu,
                      nbrs_num=args.nbrs_num, rand_num=args.rand_num,
                      alpha1=args.alpha1, alpha2=args.alpha2,
                      n_epoch=args.n_epoch, batch_size=args.batch_size, lr=args.lr,
@@ -177,6 +178,10 @@ def run_model(algorithm, X, y):
 
     elif algorithm == "lime":
         model = LIME(discretize_continuous=args.discretize_continuous, discretizer=args.discretizer)
+        fea_weight_lst = model.fit(X, y)
+
+    elif algorithm == "intgrad":
+        model = IntGrad(n_steps=args.n_steps, method=args.method)
         fea_weight_lst = model.fit(X, y)
 
     elif algorithm == "coin":

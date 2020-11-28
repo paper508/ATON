@@ -21,6 +21,9 @@ def get_parser(algorithm_name, parser):
     elif algorithm_name == "lime":
         parser.add_argument('--discretize_continuous', type=bool, default=True, help='')
         parser.add_argument("--discretizer", type=str, default="quartile", help='')
+    elif algorithm_name == "intgrad":
+        parser.add_argument('--n_steps', type=int, default=40, help='')
+        parser.add_argument('--method', type=str, default="gausslegendre", help='')
     elif algorithm_name == "coin":
         parser.add_argument('--AUG', type=float, default=10, help='an additional attribute value as augmentation')
         parser.add_argument('--ratio_nbr', type=float, default=0.08,

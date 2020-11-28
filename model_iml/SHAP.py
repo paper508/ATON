@@ -3,7 +3,7 @@ import math
 import random
 import sklearn
 import numpy as np
-from model_mle.clf_utils import classifiers
+from model_iml.clf_utils import classifiers
 
 
 class SHAP:
@@ -95,53 +95,3 @@ class SHAP:
             else:
                 exp_subspace_lst.append(self.weight2subspace(fea_weight, r=w2s_ratio))
         return exp_subspace_lst
-
-
-
-    # -------- diting method ---------- #
-    def fit_diting(self, df, chunk=-1):
-        X, y, columns_name = self.diting_pre(df)
-        full = np.arange(len(X))
-        if full > 2000:
-            train_idx = random.sample(full, 2000)
-        else:
-            train_idx = full
-        X_train = X[train_idx]
-        y_train = y[train_idx]
-        explainer = self.diting_train(X_train, y_train)
-
-        fail_idx = np.where(y == 1)[0]
-        fail_x = X[fail_idx]
-        shap_values = self.diting_test(fail_x, explainer)[1]
-
-        max_value = np.max(shap_values, axis=1)
-        max_value = np.array([(a - np.min(max_value))/(np.max(max_value)-np.min(max_value)) for a in max_value])
-        exp_idx = np.argmax(shap_values, axis=1)
-        exp_col_name = [columns_name[a] for a in exp_idx]
-        predict_df = df[['trace_id', 'device_id', 'cluster_id', 'span_name', 'label']]
-        predict_df = predict_df.loc[predict_df["label"] == 1]
-        predict_df["reason"] = exp_col_name
-        predict_df["reason_idx"] = exp_idx
-        predict_df["value"] = max_value
-
-        return predict_df
-
-    def diting_train(self, X, y):
-        svm = sklearn.svm.SVC(kernel=self.kernel, probability=True)
-        svm.fit(X, y)
-        # use Kernel SHAP to explain test set predictions
-        x_kmean = shap.kmeans(X, self.n_sample)
-        explainer = shap.KernelExplainer(svm.predict_proba, x_kmean, link="logit")
-        return explainer
-
-    def diting_test(self, X, explainer):
-        shap_values = explainer.shap_values(X, nsamples="auto")
-        return shap_values
-
-    def diting_pre(self, df_withlabel):
-        df = df_withlabel.drop(['trace_id', 'device_id', 'cluster_id', 'span_name', 'label'], axis=1)
-        X = df.values
-        y = df_withlabel['label'].values
-        columns_name = df.columns.tolist()
-
-        return X, y, columns_name
