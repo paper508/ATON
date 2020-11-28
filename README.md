@@ -4,6 +4,20 @@ This is the source code of a submission of WWW'21 (Submission Id: 508)
 
 
 
+### update news
+
+**[Nov 28] Following the reviewer's suggestion, we add two new contenders: Integrated Gradients [1] and Anchor [2].**
+
+[1] Axiomatic attribution for deep networks. In ICML. 2017.
+
+[2] Anchors: High Precision Model-Agnostic Explanations. In AAAI. 2018.
+
+We use the implementations of these two methods in package `alibi`. 
+
+Please see two classes in the folder `model_iml` (short for interpretable machine learning). 
+
+
+
 ### Structure
 `data_od_evaluation`: Ground-truth outlier interpretation annotations of real-world datasets  
 `data`: real-world datasets in csv format, the last column is label indicating each line is an outlier or a inlier  
@@ -33,7 +47,7 @@ please run `main_sinne.py`
 - `--eval [True/False]` - evaluate or not, use False for scalability test  
 ... (other hypter-parameters of different methods. You may want to use -h to check the corresponding hypter-parameters after modifing the `algorithm_name`)  
 
-### Requierments
+### Requirements
 main packages of this project  
 ```
 torch==1.3.0
@@ -45,13 +59,14 @@ tqdm==4.48.2
 prettytable==0.7.2
 shap==0.35.0
 lime==0.2.0.1
+alibi==0.5.5
 ```
 
 
 ### Ground-truth annotations
 Please also find the Ground-truth outlier interpretation annotations in folder `data_od_evaluation`.   
 *We expect these annotations can foster further possible reasearchs on this new practical probelm.*  
-  
+
 You may find that each dataset has three annotation files, please refer to the detailed annotation generation process in our submission. We detailedly introduced it in Section 5.1.4:  
 
 **How to generate the ground-truth annotations:**
